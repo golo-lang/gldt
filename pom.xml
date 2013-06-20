@@ -29,7 +29,7 @@
   <packaging>pom</packaging>
   <name>Golo Language Development Toolkit</name>
   <description>Eclipse based Golo languade developement toolkit</description>
-  <url>http://github.com/jeffmaury/gldt</url>
+  <url>http://github.com/golo-lang/gldt</url>
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -38,9 +38,9 @@
     </license>
   </licenses>
   <scm>
-    <connection>scm:git:git@github.com:jeffmaury/gldt.git</connection>
-    <developerConnection>scm:git:git@github.com:jeffmaury/gldt.git</developerConnection>
-    <url>scm:git:git@github.com:jeffmaury/gldt.git</url>
+    <connection>scm:git:git@github.com:golo-lang/gldt.git</connection>
+    <developerConnection>scm:git:git@github.com:golo-lang/gldt.git</developerConnection>
+    <url>scm:git:git@github.com:golo-lang/gldt.git</url>
   </scm>
   <developers>
     <developer>
@@ -51,6 +51,10 @@
   </developers>
   <properties>
     <tycho-version>0.17.0</tycho-version>
+    <jboss-tycho-plugin-version>0.16.0.CR2</jboss-tycho-plugin-version>
+    <mojo-executor-maven-plugin-version>2.0</mojo-executor-maven-plugin-version>
+    <wagon-maven-plugin-version>1.0-beta-4</wagon-maven-plugin-version>
+    <aws-maven-plugin-version>5.0.0.BUILD-SNAPSHOT</aws-maven-plugin-version>
   </properties>
   <modules>
     <module>org.golo-lang.gldt.core</module>
@@ -64,6 +68,10 @@
     <pluginRepository>
       <id>fornax</id>
       <url>http://fornax-platform.org/nexus/content/repositories/releases</url>
+    </pluginRepository>
+    <pluginRepository>
+      <id>jboss-staging</id>
+      <url>https://repository.jboss.org/nexus/content/groups/staging</url>
     </pluginRepository>
   </pluginRepositories>
   <build>
@@ -174,7 +182,7 @@
           <artifactId>tycho-p2-repository-plugin</artifactId>
           <version>${tycho-version}</version>
           <configuration>
-            <includeAllDependencies>true</includeAllDependencies>
+            <!--<includeAllDependencies>true</includeAllDependencies>-->
           </configuration>
         </plugin>
                 <!-- important for self-hosting -->
@@ -186,7 +194,7 @@
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>wagon-maven-plugin</artifactId>
-          <version>1.0-beta-4</version>
+          <version>${wagon-maven-plugin-version}</version>
         </plugin>
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
@@ -197,6 +205,21 @@
           <groupId>org.fornax.toolsupport</groupId>
           <artifactId>fornax-oaw-m2-plugin</artifactId>
           <version>3.4.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.groovy.maven</groupId>
+          <artifactId>gmaven-plugin</artifactId>
+          <version>1.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.twdata.maven</groupId>
+          <artifactId>mojo-executor-maven-plugin</artifactId>
+          <version>${mojo-executor-maven-plugin-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.jboss.tools.tycho-plugins</groupId>
+          <artifactId>repository-utils</artifactId>
+          <version>${jboss-tycho-plugin-version}</version>
         </plugin>
       </plugins>
     </pluginManagement>

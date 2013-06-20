@@ -3,9 +3,5 @@
    <feature url="features/org.golo-lang.gldt.core.feature_0.0.1.qualifier.jar" id="org.golo-lang.gldt.core.feature" version="0.0.1.qualifier">
       <category name="org.golo-lang.gldt"/>
    </feature>
-   <feature url="features/org.eclipse.xtext.runtime_2.4.0.v201303201134.jar" id="org.eclipse.xtext.runtime" version="2.4.0.v201303201134">
-      <category name="org.golo-lang.gldt.xtext"/>
-   </feature>
    <category-def name="org.golo-lang.gldt" label="GLDT"/>
-   <category-def name="org.golo-lang.gldt.xtext" label="Xtext"/>
 </site>

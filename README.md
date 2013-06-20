@@ -23,6 +23,18 @@ Restart Eclipse.
 
 GLDT should be installed and the GDLT editor should be run on each .golo file.
 
+<b>Automatic installation</b>
+
+Under Eclipse, click on Help -> Install new software, and enter the htpp://gldt-update-site.golo-lang.org/nightly URL
+
+and hit the Enter key. After a short time, you should see GLDT displayed in the tree, select it and click on the Next
+
+button. When the feature Golo Development Toolkit Core is displayed, click on the Next button, accept the license agreement
+
+and click on the Finish button. Restart Eclipse.
+
+GLDT should be installed and the GDLT editor should be run on each .golo file.
+
 <b>IRC<b>
 
 Log into the #gldt IRC channel on irc.freenode.net or with <a href="http://webchat.freenode.net">web irc client</a> 
