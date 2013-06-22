@@ -212,7 +212,9 @@ ForLoop:
 	block=Block;
 
 ForEachLoop:
-	FOREACH "(" elemenId=IDENTIFIER IN expression=ExpressionStatement ")" block=Block; 
+	FOREACH ("(" elemenId=IDENTIFIER IN expression=ExpressionStatement ")" ) |
+	        (elemenId=IDENTIFIER IN expression=ExpressionStatement)
+	        block=Block; 
 
 TryCatchFinally:
 	TRY tryBlock=Block
