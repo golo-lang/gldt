@@ -25,7 +25,7 @@ GLDT should be installed and the GDLT editor should be run on each .golo file.
 
 <b>Automatic installation</b>
 
-Under Eclipse, click on Help -> Install new software, and enter the htpp://gldt-update-site.golo-lang.org/nightly URL
+Under Eclipse, click on Help -> Install new software, and enter the http://gldt-update-site.golo-lang.org/nightly URL
 
 and hit the Enter key. After a short time, you should see GLDT displayed in the tree, select it and click on the Next
 
@@ -39,4 +39,4 @@ GLDT should be installed and the GDLT editor should be run on each .golo file.
 
 Log into the #gldt IRC channel on irc.freenode.net or with <a href="http://webchat.freenode.net">web irc client</a> 
 
-![Build Status](https://travis-ci.org/jeffmaury/gldt.png?branch=master) https://travis-ci.org/jeffmaury/gldt
+![Build Status](https://travis-ci.org/golo-lang/gldt.png?branch=master) https://travis-ci.org/golo-lang/gldt
