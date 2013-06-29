@@ -10,4 +10,5 @@ target
 .externalToolBuilders
 plugin.xml_gen
 rebel.xml
+golo-lang.tmp
 
