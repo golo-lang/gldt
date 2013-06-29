@@ -58,10 +58,10 @@
   </properties>
   <modules>
     <module>org.golo-lang.gldt.core</module>
+    <module>org.golo-lang.gldt.core.tests</module>
     <module>org.golo-lang.gldt.core.ui</module>
     <module>org.golo-lang.gldt.core.feature</module>
     <module>org.golo-lang.gldt.site</module>
-    <module>org.golo-lang.gldt.core.tests</module>
     <module>org.golo-lang.gldt.target</module>
   </modules>
   <pluginRepositories>
