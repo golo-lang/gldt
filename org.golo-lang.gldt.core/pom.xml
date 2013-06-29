@@ -56,6 +56,9 @@
             </goals>
             <configuration>
               <workflowDescriptor>src/main/java/org/gololang/gldt/core/GenerateGolo.mwe2</workflowDescriptor>
+              <checkResources>
+                <checkResource>src/main/java/org/gololang/gldt/core/Golo.xtext</checkResource>
+              </checkResources>
             </configuration>
           </execution>
         </executions>
