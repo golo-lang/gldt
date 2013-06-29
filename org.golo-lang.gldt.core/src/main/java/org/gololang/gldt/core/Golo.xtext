@@ -94,6 +94,10 @@ terminal STRING: "\"" (
     ("\\" ("n" | "t" | "b" | "r" | "f" | "\\" | "'" | "\"") )
   )* "\"";
 
+terminal fragment MULTI_QUOTE: "\"\"\"";
+
+terminal MULTI_STRING : MULTI_QUOTE -> (!"\\" MULTI_QUOTE);
+
 terminal CHAR: "'" (!("\n" | "\r" | "\"")) "'";
 
 terminal NULL: "null";
@@ -137,7 +141,7 @@ Arguments:
 	parms+=IDENTIFIER ("," BlankLine? parms+= IDENTIFIER)*;
 
 StringLiteral:
-	value=STRING;
+	value=STRING | value=MULTI_STRING;
 
 CharLiteral:
 	value=CHAR;
@@ -212,8 +216,8 @@ ForLoop:
 	block=Block;
 
 ForEachLoop:
-	FOREACH ("(" elemenId=IDENTIFIER IN expression=ExpressionStatement ")" ) |
-	        (elemenId=IDENTIFIER IN expression=ExpressionStatement)
+	FOREACH (("(" elemenId=IDENTIFIER IN expression=ExpressionStatement ")" ) |
+	        (elemenId=IDENTIFIER IN expression=ExpressionStatement))
 	        block=Block; 
 
 TryCatchFinally:

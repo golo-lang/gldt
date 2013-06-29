@@ -41,6 +41,30 @@ function lists_each = {
   return int: get()
 }
 
+function list_reverse = {
+  return list_data(): reverse()
+}
+
+function list_reversed = {
+  return list_data(): reversed()
+}
+
+function list_sort = {
+  return list_data(): sort()
+}
+
+function list_sorted = {
+  return list_data(): sorted()
+}
+
+function list_sort_reverse = {
+  return list_data(): sort(java.util.Collections.reverseOrder())
+}
+
+function list_sorted_reverse = {
+  return list_data(): sorted(java.util.Collections.reverseOrder())
+}
+
 # ............................................................................................... #
 
 local function set_data = {
@@ -87,6 +111,22 @@ function maps_each = {
   let int = AtomicInteger(0)
   map_data(): each(|k, v| -> int: addAndGet(v))
   return int: get()
+}
+
+# ............................................................................................... #
+
+function str_format1 = -> "%s": format("plop")
+function str_format2 = -> "%s %s": format("plop", "da plop")
+
+# ............................................................................................... #
+
+function number_repeaters = {
+  let builder = java.lang.StringBuilder()
+  2: times(-> builder: append("."))
+  3: times(|i| -> builder: append(i))
+  10: upTo(12, |i| -> builder: append(i))
+  12: downTo(10, |i| -> builder: append(i))
+  return builder: toString()
 }
 
 # ............................................................................................... #

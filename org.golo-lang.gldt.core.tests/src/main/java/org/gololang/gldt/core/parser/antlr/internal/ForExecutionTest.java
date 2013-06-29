@@ -123,4 +123,14 @@ public class ForExecutionTest {
 	public void checkThatVariableAssignmentsParsingIsOK() {
 		ParserTestHelper.testFile("/for-execution/variable-assignments.golo");
 	}
+	
+	@Test
+	public void checkThatBooleansParsingIsOK() {
+		ParserTestHelper.testFile("/for-execution/booleans.golo");
+	}
+	
+	@Test
+	public void checkThatDynamicEvaluationParsingIsOK() {
+		ParserTestHelper.testFile("/for-execution/dynamic-evaluation.golo");
+	}
 }

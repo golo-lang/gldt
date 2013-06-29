@@ -8,4 +8,9 @@ public class ForTestTest {
 	public void checkThatBootstrappedStandardAugmentationsParsingIsOK() {
 		ParserTestHelper.testFile("/for-test/bootstrapped-standard-augmentations.golo");
 	}
+	
+	@Test
+	public void checkThatIncompleteParsingIsKO() {
+		ParserTestHelper.testFile("/for-test/incomplete.golo", true);
+	}
 }

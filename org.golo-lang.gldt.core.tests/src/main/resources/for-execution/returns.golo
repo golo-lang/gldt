@@ -17,3 +17,16 @@ function no = { return (false) }
 function escaped = {
   return "\nFoo\r\n"
 }
+
+function multiline = {
+  return """This is
+*awesome*"""
+}
+
+function nasty_multiline = {
+  return """Damn!=\"""="""
+}
+
+function raw_code = {
+  return """println("Hello!\n")"""
+}

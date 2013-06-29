@@ -88,3 +88,50 @@ function nested_closures = {
   }
   return f2()
 }
+
+function closure_with_varargs_and_capture = {
+  let prefix = "> "
+  let fun = |args...| {
+    var result = 0
+    for (var i = 0, i < args: length(), i = i + 1) {
+      result = result + args: get(i)
+    }
+    return prefix + result
+  }
+  return fun(1, 2, 3)
+}
+
+function closure_with_synthetic_refs = {
+  let builder = java.lang.StringBuilder()
+  let fun = {
+    foreach (i in range(0, 3)) {
+      builder: append(i)
+    }
+  }
+  fun()
+  return builder: toString()
+}
+
+function closure_with_synthetic_refs_in_match = {
+  let fun = |x| -> match {
+    when x: startsWith("1") then "1"
+    when x: startsWith("2") then "2"
+    otherwise "0"
+  }
+  return fun("12") + fun("21") + fun("666")
+}
+
+function scoping_check = {
+  var acc = 100
+  let delta = 4
+  let f = {
+    var acc = 0
+    var delta = 0
+    for (var i = 0, i <= 3, i = i + 1) {
+      acc = acc + i
+    }
+    delta = 10
+    return acc + delta
+  }
+  return acc + f() + delta
+}

@@ -83,4 +83,9 @@ public class ForParsingAndCompilationTest {
 	public void checkThatVariablesParsingIsOK() {
 		ParserTestHelper.testFile("/for-parsing-and-compilation/variables.golo");
 	}
+	
+	@Test
+	public void checkThatMultistringsParsingIsOK() {
+		ParserTestHelper.testFile("/for-parsing-and-compilation/multistrings.golo");
+	}
 }

@@ -73,4 +73,14 @@ public class SamplesTest {
 	public void checkThatWorkersParsingIsOK() {
 		ParserTestHelper.testFile("/samples/workers.golo");
 	}
+	
+	@Test
+	public void checkThatDynamicEvaluationParsingIsOK() {
+		ParserTestHelper.testFile("/samples/dynamic-evaluation.golo");
+	}
+	
+	@Test
+	public void checkThatTemplatesChatWebappParsingIsOK() {
+		ParserTestHelper.testFile("/samples/templates-chat-webapp.golo");
+	}
 }

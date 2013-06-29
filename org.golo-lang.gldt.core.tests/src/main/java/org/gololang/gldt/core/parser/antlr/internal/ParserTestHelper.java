@@ -76,14 +76,29 @@ public class ParserTestHelper {
    * @param name the name of the resource
    */
   static void testFile(String name) {
+    testFile(name, false);
+  }
+
+  /**
+   * Load and parse a Golo source file given its resource name. Checks that no syntax errors are
+   * returned or expected issue code is generated.
+   * 
+   * @param name the name of the resource
+   * @param issueCode the expected issue code
+   */
+  static void testFile(String name, boolean errorExpected) {
     try {
       String content = loadResource(name);
       IParseResult presult = getParser(content);
-      Assert.assertFalse(toString(presult.getSyntaxErrors()), presult.hasSyntaxErrors());
-      GoloValidator validator = provider.getInjector().getInstance(GoloValidator.class);
-      ValidatorTester<GoloValidator> tester = new ValidatorTester<GoloValidator>(validator, provider.getInjector());
-      AssertableDiagnostics diagnostic = tester.validate(presult.getRootASTElement());
-      diagnostic.assertOK();
+      if (errorExpected) {
+        Assert.assertTrue(presult.hasSyntaxErrors());
+      } else {
+        Assert.assertFalse(toString(presult.getSyntaxErrors()), presult.hasSyntaxErrors());
+        GoloValidator validator = provider.getInjector().getInstance(GoloValidator.class);
+        ValidatorTester<GoloValidator> tester = new ValidatorTester<GoloValidator>(validator, provider.getInjector());
+        AssertableDiagnostics diagnostic = tester.validate(presult.getRootASTElement());
+        diagnostic.assertOK();
+      }
     }
     catch (IOException e) {
       Assert.fail("Can't load resource '" + name + "'"); //$NON-NLS-1$ //$NON-NLS-2$
