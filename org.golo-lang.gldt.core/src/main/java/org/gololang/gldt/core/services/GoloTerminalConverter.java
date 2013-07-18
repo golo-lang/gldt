@@ -19,7 +19,28 @@ import org.eclipse.xtext.nodemodel.INode;
 public class GoloTerminalConverter extends DefaultTerminalConverters {
 	
 	
-	private class LongConverter extends AbstractLexerBasedConverter<Long> {
+  private class IntConverter extends AbstractLexerBasedConverter<Integer> {
+
+    public Integer toValue(String string, INode node)
+        throws ValueConverterException {
+      return Integer.parseInt(string.replace("_", ""));
+    }
+
+    @Override
+    protected String toEscapedString(Integer value) {
+      return value.toString();
+    }
+  }
+  
+  private final IValueConverter<Integer> NUMBER = new IntConverter();
+  
+  @ValueConverter(rule = "NUMBER")
+  public IValueConverter<Integer> NUMBER() {
+    return NUMBER;
+  }
+
+
+  private class LongConverter extends AbstractLexerBasedConverter<Long> {
 
 		private static final String LONG_SUFFIX = "_L";
 		
@@ -28,6 +49,7 @@ public class GoloTerminalConverter extends DefaultTerminalConverters {
 			if (string.endsWith(LONG_SUFFIX)) {
 				string = string.substring(0, string.length() - LONG_SUFFIX.length());
 			}
+      string = string.replace("_", "");
 			return Long.parseLong(string);
 		}
 

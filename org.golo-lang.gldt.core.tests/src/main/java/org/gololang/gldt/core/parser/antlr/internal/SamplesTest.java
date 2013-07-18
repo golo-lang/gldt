@@ -83,4 +83,9 @@ public class SamplesTest {
 	public void checkThatTemplatesChatWebappParsingIsOK() {
 		ParserTestHelper.testFile("/samples/templates-chat-webapp.golo");
 	}
+	
+	@Test
+	public void checkThatCollectionLiteralsParsingIsOK() {
+	  ParserTestHelper.testFile("/samples/collection-literals.golo");
+	}
 }

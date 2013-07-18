@@ -80,9 +80,16 @@ terminal VAR: "var";
 
 terminal LET: "let";
 
-terminal NUMBER returns ecore::EInt: "-"? "0".."9" ("0".."9")*;
+terminal NUMBER returns ecore::EInt: "-"? "0".."9" ("_"? "0".."9")*;
 
-terminal LONG_NUMBER returns ecore::ELong: NUMBER "_L";
+/*
+ * LONG number should be defined as
+ * terminal LONG_NUMBER returns ecore::ELong: NUMBER "_L";
+ * but this confuse the lexer because once the DFA has detected a LONG_NUMBER
+ * it will call ruleNUMBER which expected a number after the _
+ * Having everything on the same definition will make the lexer of the alternative
+ */
+terminal LONG_NUMBER returns ecore::ELong: "-"? "0".."9" ("_"? "0".."9")* "_L";
 
 terminal FLOATING_NUMBER returns ecore::EDouble: ("-")? ("0".."9")+ ("." ("0".."9")+)? ("e" ("0".."9")+)?;
 
@@ -112,6 +119,8 @@ CLASSREF: name=QualifiedName '.' ( ('class' | MODULE));
 
 FUNREF: "^" (prefix=QualifiedName "::")? name=IDENTIFIER;
 
+terminal COLL_START: ("array" | "list" | "set" | "map" | "vector" | "tuple" )? "[";
+
 terminal fragment LETTER: "A".."Z" | "a".."z" | "_" | "$";
 
 terminal fragment ID_REST: LETTER | "0".."9";
@@ -126,7 +135,8 @@ TerminalExpression:
 	functionInvocation=FunctionInvocation |
 	reference=Reference |
 	match=MatchStmt |
-	function=FunctionStmt;
+	function=FunctionStmt |
+	collection=CollectionLiteral;
 
 BlankLine:
 	NEWLINE | COMMENT;
@@ -275,6 +285,11 @@ Literal:
 Reference:
 	id=IDENTIFIER;
 
+CollectionLiteral:
+  COLL_START BlankLine?
+  (statements+=ExpressionStatement ("," BlankLine? statements+=ExpressionStatement)* BlankLine?)?
+  "]"
+;
 LetOrVar:
 	(LET idToken=IDENTIFIER "=" BlankLine? ExpressionStatement) |
 	(VAR idToken=IDENTIFIER "=" BlankLine? ExpressionStatement);

@@ -133,4 +133,25 @@ public class ForExecutionTest {
 	public void checkThatDynamicEvaluationParsingIsOK() {
 		ParserTestHelper.testFile("/for-execution/dynamic-evaluation.golo");
 	}
+	
+	 @Test
+	  public void checkThatCollectionLiteralsParsingIsOK() {
+	    ParserTestHelper.testFile("/for-execution/collection-literals.golo");
+	  }
+	 
+   @Test
+   public void checkThatNumericLiteralsParsingIsOK() {
+     ParserTestHelper.testFile("/for-execution/numeric-literals.golo");
+   }
+   
+   @Test
+   public void checkThatFailureNumericDoubleUnderscoreIsKO() {
+     ParserTestHelper.testFile("/for-execution/failure-numeric-double-underscore.golo", true);
+   }
+   
+   @Test
+   public void checkThatFailureNumericTrailingUnderscoreIsKO() {
+     ParserTestHelper.testFile("/for-execution/failure-numeric-trailing-underscore.golo", true);
+   }
+
 }

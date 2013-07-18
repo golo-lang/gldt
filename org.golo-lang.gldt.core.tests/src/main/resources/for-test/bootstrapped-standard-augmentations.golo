@@ -50,19 +50,19 @@ function list_reversed = {
 }
 
 function list_sort = {
-  return list_data(): sort()
+  return list_data(): order()
 }
 
 function list_sorted = {
-  return list_data(): sorted()
+  return list_data(): ordered()
 }
 
 function list_sort_reverse = {
-  return list_data(): sort(java.util.Collections.reverseOrder())
+  return list_data(): order(java.util.Collections.reverseOrder())
 }
 
 function list_sorted_reverse = {
-  return list_data(): sorted(java.util.Collections.reverseOrder())
+  return list_data(): ordered(java.util.Collections.reverseOrder())
 }
 
 # ............................................................................................... #
@@ -127,6 +127,14 @@ function number_repeaters = {
   10: upTo(12, |i| -> builder: append(i))
   12: downTo(10, |i| -> builder: append(i))
   return builder: toString()
+}
+
+# ............................................................................................... #
+
+function tupled = {
+  let t = [1, 2, 3, 4, 5]
+  return t: filter(|n| -> (n % 2) == 0): map(|n| -> n * 10): reduce(0, |acc, n| -> acc + n)
+
 }
 
 # ............................................................................................... #

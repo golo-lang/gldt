@@ -88,4 +88,10 @@ public class ForParsingAndCompilationTest {
 	public void checkThatMultistringsParsingIsOK() {
 		ParserTestHelper.testFile("/for-parsing-and-compilation/multistrings.golo");
 	}
+	
+  @Test
+  public void checkThatCollectionLiteralsParsingIsOK() {
+    ParserTestHelper.testFile("/for-parsing-and-compilation/collection-literals.golo");
+  }
+
 }
