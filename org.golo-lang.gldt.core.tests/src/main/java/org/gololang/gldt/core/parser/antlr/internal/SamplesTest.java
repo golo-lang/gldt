@@ -88,4 +88,9 @@ public class SamplesTest {
 	public void checkThatCollectionLiteralsParsingIsOK() {
 	  ParserTestHelper.testFile("/samples/collection-literals.golo");
 	}
+	
+	 @Test
+	  public void checkThatStructsParsingIsOK() {
+	    ParserTestHelper.testFile("/samples/structs.golo");
+	  }
 }

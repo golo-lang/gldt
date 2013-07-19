@@ -12,6 +12,7 @@ import org.gololang.gldt.core.golo.GoloPackage;
 import org.gololang.gldt.core.golo.ImportDeclaration;
 import org.gololang.gldt.core.golo.ModuleDeclaration;
 import org.gololang.gldt.core.golo.QualifiedName;
+import org.gololang.gldt.core.golo.StructDeclararation;
 import org.gololang.gldt.core.golo.TopLevelDeclaration;
 
 /**
@@ -104,7 +105,11 @@ public class GoloOutlineTreeProvider extends org.eclipse.xtext.ui.editor.outline
      * @return the name as string
      */
     protected String _text(TopLevelDeclaration topLevelDeclaration) {
-    	return _text(topLevelDeclaration.getFunctionDecl());
+      if (topLevelDeclaration.getFunctionDecl() != null) {
+        return _text(topLevelDeclaration.getFunctionDecl());
+      } else {
+        return _text(topLevelDeclaration.getStruct());
+      }
     }
     
     /**
@@ -184,5 +189,33 @@ public class GoloOutlineTreeProvider extends org.eclipse.xtext.ui.editor.outline
     	for(FunctionDeclaration functionDeclaration : augmentDeclaration.getFunc()) {
     		createNode(parentNode, functionDeclaration);
     	}
+    }
+    
+    /**
+     * Displays a structure declaration as a name and members.
+     * 
+     * @param structDeclaration
+     * @return the name and members as string
+     */
+    protected String _text(StructDeclararation structDeclaration) {
+      StringBuilder sb = new StringBuilder();
+      if (structDeclaration != null) {
+        sb.append(structDeclaration.getName());
+        sb.append('(');
+        boolean first = true;
+        for(String member : structDeclaration.getMember()) {
+          if (!first) {
+            sb.append(',');
+          }
+          sb.append(member);
+          first = false;
+        }
+        sb.append(')');
+      }
+      return sb.toString();
+    }
+
+    protected boolean _isLeaf(StructDeclararation structDeclaration) {
+      return true;
     }
 }

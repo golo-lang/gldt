@@ -145,13 +145,18 @@ public class ForExecutionTest {
    }
    
    @Test
-   public void checkThatFailureNumericDoubleUnderscoreIsKO() {
+   public void checkThatFailureNumericDoubleUnderscoreParsingIsKO() {
      ParserTestHelper.testFile("/for-execution/failure-numeric-double-underscore.golo", true);
    }
    
    @Test
-   public void checkThatFailureNumericTrailingUnderscoreIsKO() {
+   public void checkThatFailureNumericTrailingUnderscoreParsingIsKO() {
      ParserTestHelper.testFile("/for-execution/failure-numeric-trailing-underscore.golo", true);
+   }
+   
+   @Test
+   public void checkThatStructsParsingIsOK() {
+     ParserTestHelper.testFile("/for-execution/structs.golo");
    }
 
 }

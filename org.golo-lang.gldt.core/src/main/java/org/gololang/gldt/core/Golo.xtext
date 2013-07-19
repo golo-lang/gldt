@@ -66,6 +66,8 @@ terminal BREAK: "break";
 
 terminal CONTINUE: "continue";
 
+terminal STRUCT: "struct";
+
 terminal ASSOCIATIVE_OPERATOR: ("*" | "/" | "%" |
                            "<" | "<=" | "==" | "!=" | ">" | ">=" | 
                            "is" | "isnt" |
@@ -182,7 +184,8 @@ ImportDeclaration:
 
 TopLevelDeclaration:
 	AugmentDeclaration |
-	((isLocal=LOCAL)? functionDecl=FunctionDeclaration);
+	((isLocal=LOCAL)? functionDecl=FunctionDeclaration) |
+  struct=StructDeclararation;
 
 AugmentDeclaration:
 	AUGMENT target=QualifiedName "{" BlankLines
@@ -191,6 +194,11 @@ AugmentDeclaration:
 FunctionDeclaration:
 	FUNCTION name=IDENTIFIER "=" function=FunctionStmt;
 
+StructDeclararation:
+  STRUCT name=IDENTIFIER "=" "{" BlankLines
+  member+=IDENTIFIER BlankLines ("," BlankLines member+=IDENTIFIER BlankLines)*
+  "}";
+  
 Statement:
 	BlankLine |
 	Assignment |

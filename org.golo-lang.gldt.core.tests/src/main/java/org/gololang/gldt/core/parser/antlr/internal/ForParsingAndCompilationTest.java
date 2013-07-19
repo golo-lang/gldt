@@ -34,6 +34,11 @@ public class ForParsingAndCompilationTest {
 		ParserTestHelper.testFile("/for-parsing-and-compilation/function-call.golo");
 	}
 	
+	 @Test
+	  public void checkThatStructParsingIsOK() {
+	    ParserTestHelper.testFile("/for-parsing-and-compilation/struct.golo");
+	  }
+	
 	@Test
 	public void checkThatFunctionsWithReturnsParsingIsOK() {
 		ParserTestHelper.testFile("/for-parsing-and-compilation/functions-with-returns.golo");
