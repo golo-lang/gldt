@@ -35,7 +35,7 @@ and click on the Finish button. Restart Eclipse.
 
 GLDT should be installed and the GDLT editor should be run on each .golo file.
 
-<b><a id="JDT">JDT Integration</a></b>
+<b><a name="JDT">JDT Integration</a></b>
 
 GLDT now integrates with Eclipse JDT. If you create a Java project and set the Golo nature, then each .golo file
 
