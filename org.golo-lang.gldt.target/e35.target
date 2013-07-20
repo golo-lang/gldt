@@ -25,5 +25,9 @@
 <unit id="org.eclipse.swtbot.eclipse.feature.group" version="2.0.4.20110304_0338-e5aff47-dev-e35"/>
 <repository location="http://download.eclipse.org/technology/swtbot/galileo/dev-build/update-site"/>
 </location>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.objectweb.asm" version="4.0.0.v201302062210"/>
+<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20130517111416/repository"/>
+</location>
 </locations>
 </target>

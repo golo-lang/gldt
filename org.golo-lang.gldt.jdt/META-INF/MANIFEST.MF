@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Golo Development Toolkit JDT Integration
+Bundle-SymbolicName: org.golo-lang.gldt.jdt;singleton:=true
+Bundle-Version: 0.0.1.qualifier
+Bundle-Activator: org.gololang.gldt.jdt.internal.GoloJdtPlugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.jdt.core,
+ org.eclipse.core.resources,
+ org.eclipse.ui.ide,
+ org.eclipse.jdt.launching,
+ org.objectweb.asm;bundle-version="[4.0.0,5.0.0)"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ClassPath: .
+Export-Package: org.gololang.gldt.jdt,
+ org.gololang.gldt.jdt.compiler
+Bundle-Vendor: Jeff MAURY
+Import-Package: com.google.common.base

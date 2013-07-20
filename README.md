@@ -35,6 +35,20 @@ and click on the Finish button. Restart Eclipse.
 
 GLDT should be installed and the GDLT editor should be run on each .golo file.
 
+<b><a name"JDT">JDT Integration</a></b>
+
+GLDT now integrates with Eclipse JDT. If you create a Java project and set the Golo nature, then each .golo file
+
+that is located into one of the Java source folders with gets compiled.
+
+However, GLDT does not embed the Golo compiler as Golo is changing today at a high pace. So you must download yourself 
+
+the Golo jar file and set it in your project classpath. If the Golo jar file is not in your project classpath, then
+
+compilation of the .golo files with failed and you will get a dialog error.
+
+To set the Golo nature to your Java project, right click on your project, and select Configure -> Add Golo nature
+
 <b>IRC<b>
 
 Log into the #gldt IRC channel on irc.freenode.net or with <a href="http://webchat.freenode.net">web irc client</a> 
