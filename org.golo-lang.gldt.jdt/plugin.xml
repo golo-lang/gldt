@@ -137,5 +137,24 @@
             type="org.eclipse.core.resources.problemmarker">
       </super>
    </extension>
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="org.gololang.gldt.jdt.internal.launch.GoloScriptLaunchConfigurationDelegate"
+            id="org.golo-lang.gldt.jdt.launchGoloScript"
+            modes="run"
+            name="Golo script"
+            sourceLocatorId="org.eclipse.jdt.launching.sourceLocator.JavaSourceLookupDirector"
+            sourcePathComputerId="org.eclipse.jdt.launching.sourceLookup.javaSourcePathComputer">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="org.gololang.gldt.jdt.internal.launch.GoloScriptLaunchConfigurationTabGroup"
+            id="org.golo-lang.gldt.jdt.launchGoloScriptConfigurationTabGroup"
+            type="org.golo-lang.gldt.jdt.launchGoloScript">
+      </launchConfigurationTabGroup>
+   </extension>
 
 </plugin>
