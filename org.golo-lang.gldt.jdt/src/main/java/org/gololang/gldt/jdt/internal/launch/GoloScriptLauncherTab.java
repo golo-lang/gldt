@@ -105,7 +105,7 @@ public class GoloScriptLauncherTab extends JavaMainTab {
   @Override
   public void setDefaults(ILaunchConfigurationWorkingCopy config) {
     super.setDefaults(config);
-    config.setAttribute(IJavaLaunchConfigurationConstants.ATTR_MAIN_TYPE_NAME, "fr.insalyon.citi.golo.cli.Main");
+    config.setAttribute(IJavaLaunchConfigurationConstants.ATTR_MAIN_TYPE_NAME, GoloJdtConstants.GOLO_CLI_CLASS_NAME);
   }
 
   protected void createGoloScriptEditor(Composite parent) {

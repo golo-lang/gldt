@@ -33,10 +33,17 @@ public class GoloJdtConstants {
   public static final String GOLO_FILE_FILTER = "*." + GOLO_FILE_EXTENSION; //$NON-NLS-1$
 
   /**
+   * Identifier of the run Golo script confguration type
+   */
+  public static final String GOLO_LAUNCH_SCRIPT_CONFIGURATION_TYPE = GoloJdtPlugin.PLUGIN_ID + ".launchGoloScript"; //$NON-NLS-1$
+  
+  /**
    * The name of the configuration parameter that stores the Golo script file name (relative
    * to the workspace).
    */
   public static final String GOLO_LAUNCH_SCRIPT_PARAMETER_NAME = "script"; //$NON-NLS-1$
 
   public static final String GOLO_LAUNCH_SCRIPT_PARAMETER_DEFAULT_VALUE = ""; //$NON-NLS-1$
+
+  public static final String GOLO_CLI_CLASS_NAME = "fr.insalyon.citi.golo.cli.Main";
 }

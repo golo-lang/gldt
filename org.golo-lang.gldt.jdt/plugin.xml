@@ -149,12 +149,56 @@
       </launchConfigurationType>
    </extension>
    <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="org.golo-lang.gldt.jdt.launchGoloScript"
+            icon="icons/golo16.png"
+            id="org.golo-lang.gldt.jdt.launchConfigurationTypeImage.goloScript">
+      </launchConfigurationTypeImage>
+   </extension>
+   <extension
          point="org.eclipse.debug.ui.launchConfigurationTabGroups">
       <launchConfigurationTabGroup
             class="org.gololang.gldt.jdt.internal.launch.GoloScriptLaunchConfigurationTabGroup"
             id="org.golo-lang.gldt.jdt.launchGoloScriptConfigurationTabGroup"
             type="org.golo-lang.gldt.jdt.launchGoloScript">
       </launchConfigurationTabGroup>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchShortcuts">
+      <shortcut
+            class="org.gololang.gldt.jdt.internal.launch.GoloScriptLaunchShortcut"
+            description="Run a Golo script"
+            icon="icons/golo16.png"
+            id="org.golo-lang.gldt.jdt.shortcut.goloScript"
+            label="Golo script"
+            modes="run">
+         <contextualLaunch>
+            <enablement>
+               <with
+                     variable="selection">
+                  <count
+                        value="1">
+                  </count>
+                  <iterate>
+                     <adapt
+                           type="org.eclipse.core.resources.IResource">
+                        <and>
+                           <test
+                                 property="org.eclipse.debug.ui.projectNature"
+                                 value="org.golo-lang.gldt.jdt.goloNature">
+                           </test>
+                           <test
+                                 property="org.eclipse.debug.ui.matchesPattern"
+                                 value="*.golo">
+                           </test>
+                        </and>
+                     </adapt>
+                  </iterate>
+               </with>
+            </enablement>
+         </contextualLaunch>
+      </shortcut>
    </extension>
 
 </plugin>
