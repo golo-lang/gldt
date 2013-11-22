@@ -335,15 +335,15 @@ ConditionalBranching:
 	(ELSE (elseCondition=ConditionalBranching | elseBlock=Block))?;
 
 CaseStmt:
-	CASE "{" BlankLine?
-	( WHEN expressions+=ExpressionStatement block+=Block BlankLine? )+
-    OTHERWISE Block BlankLine?
+	CASE "{" BlankLines
+	( WHEN expressions+=ExpressionStatement block+=Block BlankLines )+
+    OTHERWISE Block BlankLines
   "}";
 
 MatchStmt:
-	MATCH "{" BlankLine?
-    ( WHEN BlankLine? whenExpression+=ExpressionStatement BlankLine? 
-      THEN BlankLine? thenExpression+=ExpressionStatement BlankLine? )+
-    OTHERWISE  BlankLine? otherwiseExpression=ExpressionStatement BlankLine?
+	MATCH "{" BlankLines
+    ( WHEN BlankLines whenExpression+=ExpressionStatement BlankLines 
+      THEN BlankLines thenExpression+=ExpressionStatement BlankLines )+
+    OTHERWISE  BlankLines otherwiseExpression=ExpressionStatement BlankLines
   "}";
 
