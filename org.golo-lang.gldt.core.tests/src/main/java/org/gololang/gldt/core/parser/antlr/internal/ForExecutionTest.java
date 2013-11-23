@@ -170,8 +170,22 @@ public class ForExecutionTest {
    }
    
    @Test
+   public void checkThatFailureMissingRefInClosureParsingIsOK() {
+     ParserTestHelper.testFile("/for-execution/failure-missing-ref-in-closure.golo");
+   }
+
+   @Test
    public void checkThatStructsParsingIsOK() {
      ParserTestHelper.testFile("/for-execution/structs.golo");
    }
 
+   @Test
+   public void checkThatAdaptersParsingIsOK() {
+     ParserTestHelper.testFile("/for-execution/adapters.golo");
+   }
+   
+   @Test
+   public void checkThatSAMParsingIsOK() {
+     ParserTestHelper.testFile("/for-execution/sam.golo");
+   }
 }

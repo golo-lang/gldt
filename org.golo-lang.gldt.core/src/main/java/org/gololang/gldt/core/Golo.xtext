@@ -281,7 +281,8 @@ AssociativeExpression:
 	BlankLine?;
 
 MethodInvocation:
-	token=IDENTIFIER =>"(" BlankLine? Expressions? ")";
+	token=IDENTIFIER =>"(" BlankLine? expressions=Expressions? ")"
+	anonymousInvocation+=AnonymousFunctionInvocation*;
 
 Block:
 	{Block}
@@ -327,8 +328,12 @@ ReturnStmt:
 Expressions:
 	expressions+=ExpressionStatement ("," BlankLine? expressions+=ExpressionStatement)*;
 	
+AnonymousFunctionInvocation:
+  "(" BlankLine? expressions=Expressions? ")";
+  
 FunctionInvocation:
-	name=QualifiedName "(" BlankLine? Expressions? ")";
+	name=QualifiedName "(" BlankLine? expression=Expressions? ")"
+	anonymousInvocations+=AnonymousFunctionInvocation*;
 	
 ConditionalBranching:
 	IF expr=ExpressionStatement block=Block

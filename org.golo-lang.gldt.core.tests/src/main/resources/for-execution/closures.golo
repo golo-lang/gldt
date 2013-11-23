@@ -101,6 +101,19 @@ function closure_with_varargs_and_capture = {
   return fun(1, 2, 3)
 }
 
+function closure_with_trailing_varargs_and_capture = {
+  let prefix = "|"
+  let f = -> |head, tail...| {
+    let result = java.lang.StringBuilder(): append(prefix): append(head)
+    foreach element in tail {
+      result: append(element)
+    }
+    return result: toString()
+  }
+  let g = f()
+  return g(1) + g(1, 2) + g(1, 2, 3)
+}
+
 function closure_with_synthetic_refs = {
   let builder = java.lang.StringBuilder()
   let fun = {
@@ -134,4 +147,20 @@ function scoping_check = {
     return acc + delta
   }
   return acc + f() + delta
+}
+
+function closure_self_reference = {
+  let fun = |n| {
+    if n < 3 {
+      return fun(n + 1)
+    } else {
+      return 1
+    }
+  }
+  return fun(0)
+}
+
+function funky = {
+  let adder = |x| -> |y| -> |z| -> x + y + z
+  return adder(1)(2)(3)
 }

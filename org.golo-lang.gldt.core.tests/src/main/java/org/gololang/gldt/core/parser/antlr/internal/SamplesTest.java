@@ -104,8 +104,13 @@ public class SamplesTest {
 	  ParserTestHelper.testFile("/samples/collection-literals.golo");
 	}
 	
-	 @Test
-	  public void checkThatStructsParsingIsOK() {
-	    ParserTestHelper.testFile("/samples/structs.golo");
-	  }
+	@Test
+	public void checkThatStructsParsingIsOK() {
+	  ParserTestHelper.testFile("/samples/structs.golo");
+	}
+	
+	@Test
+	public void checkThatAdaptersParsingIsOK() {
+	  ParserTestHelper.testFile("/samples/adapters.golo");
+	}
 }
