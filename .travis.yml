@@ -4,9 +4,11 @@ jdk:
   - openjdk7
   - oraclejdk7
 before_install:
+  - wget http://www.apache.org/dist/maven/maven-3/3.0.5/binaries/apache-maven-3.0.5-bin.tar.gz
+  - tar -zxvf apache-maven-3.0.5-bin.tar.gz
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
-script: "mvn verify"
+script: "../../apache-maven-3.0.5/bin/mvn verify"
 notifications:
   email:
   - jeffmaury@jeffmaury.com
