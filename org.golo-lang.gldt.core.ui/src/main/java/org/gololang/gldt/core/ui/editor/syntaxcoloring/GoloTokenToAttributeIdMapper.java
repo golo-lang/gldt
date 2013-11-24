@@ -26,7 +26,6 @@ public class GoloTokenToAttributeIdMapper extends
 
 	@Override
 	protected String calculateId(String tokenName, int tokenType) {
-		System.out.println(tokenName);
 		if ("RULE_STRING".equals(tokenName) || "RULE_CHAR".equals(tokenName)) {
 			return DefaultHighlightingConfiguration.STRING_ID;
 		} else if ("RULE_COMMENT".equals(tokenName)) {
