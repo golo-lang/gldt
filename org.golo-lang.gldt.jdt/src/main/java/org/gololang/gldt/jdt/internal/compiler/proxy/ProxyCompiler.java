@@ -92,10 +92,14 @@ public class ProxyCompiler implements Compiler {
       return wrap(results);
     }
     catch (Exception e) {
-      CompilerCompilationException ce = new CompilerCompilationException(e.getLocalizedMessage(), e);
-      completeException(ce, e);
+      Throwable cause = e;
+      if (e instanceof InvocationTargetException) {
+        cause = ((InvocationTargetException)e).getTargetException();
+      }
+      CompilerCompilationException ce = new CompilerCompilationException(e.getLocalizedMessage(), cause);
+      completeException(ce, cause);
+      throw ce;
     }
-    return null;
   }
 
   /**
@@ -104,7 +108,7 @@ public class ProxyCompiler implements Compiler {
    * @param ce the return exception
    * @param e the native Golo compiler exception
    */
-  private void completeException(CompilerCompilationException ce, Exception e) {
+  private void completeException(CompilerCompilationException ce, Throwable e) {
     try {
       List<Object> problems = (List<Object>) exceptionProblemsMethod.invoke(e, new Object[] {});
       for(Object problem : problems) {
