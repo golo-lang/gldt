@@ -7,11 +7,10 @@
 <unit id="org.eclipse.jdt.feature.group" version="3.8.2.v20130116-090414-8-8nFu3FNOfwKLRttdWQJ-2z-_83"/>
 <unit id="org.eclipse.equinox.executable.feature.group"  version="3.6.0.v20121119-201001-7P7OG2BFLWUl7UnqBnO8V4Of"/>
 <unit id="org.eclipse.rcp.feature.group" version="3.8.2.v20130118-180157-96BuGOZFxwOAeG8Ofmqicz0tPK"/>
-<repository location="http://download.eclipse.org/updates/3.8"/>
-</location>
+<repository location="http://download.eclipse.org/eclipse/updates/3.8"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.xtext.sdk.feature.group" version="2.4.0.v201303201134"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.4.3.v201309030823"/>
 <repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
