@@ -95,7 +95,7 @@ public class GoloProposalProvider extends AbstractGoloProposalProvider {
 	}
 
 	@Override
-	public void complete_IDENTIFIER(EObject model, RuleCall ruleCall,
+	public void complete_ID(EObject model, RuleCall ruleCall,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		delegate.complete_ID(model, ruleCall, context, acceptor);
 	}
@@ -275,7 +275,7 @@ public class GoloProposalProvider extends AbstractGoloProposalProvider {
 	}
 	
 	@Override
-	public void complete_NUMBER(EObject model, RuleCall ruleCall,
+	public void complete_GNUMBER(EObject model, RuleCall ruleCall,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		complete_INT(model, ruleCall, context, acceptor);
 	}
@@ -316,11 +316,4 @@ public class GoloProposalProvider extends AbstractGoloProposalProvider {
 		completeKeyword((Keyword) ruleCall.getRule().getAlternatives(), context, acceptor);
 	}
 
-	@Override
-	public void complete_INVOCATION(EObject model, RuleCall ruleCall,
-			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		for(AbstractElement e : ((CompoundElement)ruleCall.getRule().getAlternatives()).getElements()) {
-			completeKeyword((Keyword) e, context, acceptor);
-		}
-	}
 }

@@ -16,9 +16,12 @@
 package org.gololang.gldt.core.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.debug.IStratumBreakpointSupport;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.gololang.gldt.core.ui.editor.syntaxcoloring.GoloTokenToAttributeIdMapper;
+import org.gololang.gldt.core.ui.launch.GoloDebugSupport;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -35,7 +38,12 @@ public class GoloUiModule extends org.gololang.gldt.core.ui.AbstractGoloUiModule
 		return IXtextEditorCallback.NullImpl.class;
 	}
 
-	public Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindTokenToAttributeMapper() {
+	public Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindAbstractAntlrTokenToAttributeIdMapper() {
 		return GoloTokenToAttributeIdMapper.class;
 	}
+	
+	public Class<? extends IStratumBreakpointSupport> bindIStratumBreakpointSupport() {
+	  return GoloDebugSupport.class;
+	}
+	
 }

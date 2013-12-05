@@ -23,7 +23,6 @@ import org.gololang.gldt.core.golo.FunctionDeclaration;
 import org.gololang.gldt.core.golo.GoloPackage;
 import org.gololang.gldt.core.golo.ImportDeclaration;
 import org.gololang.gldt.core.golo.ModuleDeclaration;
-import org.gololang.gldt.core.golo.QualifiedName;
 import org.gololang.gldt.core.golo.StructDeclararation;
 import org.gololang.gldt.core.golo.TopLevelDeclaration;
 
@@ -58,7 +57,7 @@ public class GoloOutlineTreeProvider extends org.eclipse.xtext.ui.editor.outline
      * @return the name as string
      */
     protected String _text(ModuleDeclaration moduleDeclaration) {
-    	return _text(moduleDeclaration.getName());
+    	return moduleDeclaration.getName();
     }
     
     /**
@@ -78,7 +77,7 @@ public class GoloOutlineTreeProvider extends org.eclipse.xtext.ui.editor.outline
      * @return the name as string
      */
     protected String _text(ImportDeclaration importDeclaration) {
-    	return _text(importDeclaration.getName());
+    	return importDeclaration.getName();
     }
     
     /**
@@ -89,25 +88,6 @@ public class GoloOutlineTreeProvider extends org.eclipse.xtext.ui.editor.outline
      */
     protected boolean _isLeaf(ImportDeclaration importDeclaration) {
     	return true;
-    }
-    
-    /**
-     * Displays a qualified name as id1.id2....
-     * 
-     * @param name the qualified name
-     * @return the string to display
-     */
-    protected String _text(QualifiedName name) {
-    	StringBuilder sb = new StringBuilder();
-    	boolean first = true;
-    	for(String element : name.getElements()) {
-    		if (!first) {
-    			sb.append('.');
-    		}
-    		sb.append(element);
-    		first = false;
-    	}
-    	return sb.toString();
     }
     
     /**
@@ -184,7 +164,7 @@ public class GoloOutlineTreeProvider extends org.eclipse.xtext.ui.editor.outline
      * @return the name and parameters as string
      */
     protected String _text(AugmentDeclaration augmentDeclaration) {
-    	return _text(augmentDeclaration.getTarget());
+    	return augmentDeclaration.getTarget();
     }
 
     protected boolean _isLeaf(AugmentDeclaration augmentDeclaration) {

@@ -142,7 +142,7 @@
       <launchConfigurationType
             delegate="org.gololang.gldt.jdt.internal.launch.GoloScriptLaunchConfigurationDelegate"
             id="org.golo-lang.gldt.jdt.launchGoloScript"
-            modes="run"
+            modes="run,debug"
             name="Golo script"
             sourceLocatorId="org.eclipse.jdt.launching.sourceLocator.JavaSourceLookupDirector"
             sourcePathComputerId="org.eclipse.jdt.launching.sourceLookup.javaSourcePathComputer">
@@ -200,5 +200,18 @@
          </contextualLaunch>
       </shortcut>
    </extension>
-
+   <extension
+         point="org.eclipse.ui.editorActions">
+      <editorContribution
+            id="org.eclipse.jdt.debug.CompilationUnitEditor.BreakpointRulerActions"
+            targetID="org.gololang.gldt.core.Golo">
+         <action
+               actionID="RulerDoubleClick"
+               class="org.eclipse.debug.ui.actions.RulerToggleBreakpointActionDelegate"
+               id="org.eclipse.jdt.debug.ui.actions.ManageBreakpointRulerAction"
+               label="Toggle breakpoint"
+               style="push">
+         </action>
+      </editorContribution>
+   </extension>
 </plugin>

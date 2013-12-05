@@ -35,7 +35,7 @@ public class GoloTerminalConverter extends DefaultTerminalConverters {
 
     public Integer toValue(String string, INode node)
         throws ValueConverterException {
-      return Integer.parseInt(string.replace("_", ""));
+      return Integer.parseInt(string.replace("_", "")); //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     @Override
@@ -44,24 +44,24 @@ public class GoloTerminalConverter extends DefaultTerminalConverters {
     }
   }
   
-  private final IValueConverter<Integer> NUMBER = new IntConverter();
+  private final IValueConverter<Integer> GNUMBER = new IntConverter();
   
-  @ValueConverter(rule = "NUMBER")
-  public IValueConverter<Integer> NUMBER() {
-    return NUMBER;
+  @ValueConverter(rule = "GNUMBER")
+  public IValueConverter<Integer> GNUMBER() {
+    return GNUMBER;
   }
 
 
   private class LongConverter extends AbstractLexerBasedConverter<Long> {
 
-		private static final String LONG_SUFFIX = "_L";
+		private static final String LONG_SUFFIX = "_L"; //$NON-NLS-1$
 		
 		public Long toValue(String string, INode node)
 				throws ValueConverterException {
 			if (string.endsWith(LONG_SUFFIX)) {
 				string = string.substring(0, string.length() - LONG_SUFFIX.length());
 			}
-      string = string.replace("_", "");
+      string = string.replace("_", "");  //$NON-NLS-1$//$NON-NLS-2$
 			return Long.parseLong(string);
 		}
 
@@ -95,7 +95,7 @@ public class GoloTerminalConverter extends DefaultTerminalConverters {
 	
 	private class FloatConverter extends AbstractLexerBasedConverter<Float> {
 
-		private static final String FLOAT_SUFFIX = "_F";
+		private static final String FLOAT_SUFFIX = "_F"; //$NON-NLS-1$
 
 		public Float toValue(String string, INode node)
 				throws ValueConverterException {

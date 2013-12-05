@@ -13,7 +13,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 ******************************************************************************/
-grammar org.gololang.gldt.core.Golo hidden(WS)
+grammar org.gololang.gldt.core.Golo with org.eclipse.xtext.xbase.Xbase hidden(WS) 
 
 generate golo "http://www.gololang.org/gldt/core/Golo"
 
@@ -83,12 +83,12 @@ terminal CONTINUE: "continue";
 
 terminal STRUCT: "struct";
 
-terminal ASSOCIATIVE_OPERATOR: ("*" | "/" | "%" |
+ASSOCIATIVE_OPERATOR: ("*" | "/" | "%" |
                            "<" | "<=" | "==" | "!=" | ">" | ">=" | 
                            "is" | "isnt" |
                            "oftype" ); 
 
-terminal COMMUTATIVE_OPERATOR: ("+" | "-" |
+COMMUTATIVE_OPERATOR: ("+" | "-" |
                            "and" | "or" | "orIfNull");
 
 terminal UNARY_OPERATOR: "not";
@@ -97,7 +97,7 @@ terminal VAR: "var";
 
 terminal LET: "let";
 
-terminal NUMBER returns ecore::EInt: "-"? "0".."9" ("_"? "0".."9")*;
+terminal GNUMBER returns ecore::EInt: "-"? "0".."9" ("_"? "0".."9")*;
 
 /*
  * LONG number should be defined as
@@ -130,19 +130,25 @@ terminal TRUE: "true";
 
 terminal FALSE: "false";
 
-terminal INVOCATION: ':' | '?:';
+/*terminal INVOCATION: ':' | '?:';*/
 
 CLASSREF: name=QualifiedName '.' ( ('class' | MODULE));
 
-FUNREF: "^" (prefix=QualifiedName "::")? name=IDENTIFIER;
+FUNREF: "^" (prefix=QualifiedName "::")? name=ID;
 
-terminal COLL_START: ("array" | "list" | "set" | "map" | "vector" | "tuple" )? "[";
+terminal fragment OPEN_BRACKET: "[";
+
+terminal COLL_START: ("array" | "list" | "set" | "map" | "vector" | "tuple" )? OPEN_BRACKET;
 
 terminal fragment LETTER: "A".."Z" | "a".."z" | "_" | "$";
 
 terminal fragment ID_REST: LETTER | "0".."9";
 
-terminal IDENTIFIER: '`'? LETTER (ID_REST)*;
+terminal fragment SUPER: "super";
+
+terminal fragment NEW: "new";
+
+terminal ID: ('`'? LETTER (ID_REST)*) ;
 
 
 terminal COMMENT: "#" (!("\n" | "\r" | "\r\n"))* ("\n" | "\r" | "\r\n")?;
@@ -161,11 +167,11 @@ BlankLine:
 BlankLines:
 	BlankLine*;
 
-QualifiedName:
-	elements+=IDENTIFIER ("." elements+=IDENTIFIER)*;
+/*QualifiedName:
+	elements+=IDENTIFIER ("." elements+=IDENTIFIER)*;*/
 
 Arguments:
-	parms+=IDENTIFIER ("," BlankLine? parms+= IDENTIFIER)*;
+	parms+=ID ("," BlankLine? parms+= ID)*;
 
 StringLiteral:
 	value=STRING | value=MULTI_STRING;
@@ -177,7 +183,7 @@ LongLiteral:
 	value=LONG_NUMBER;
 	
 IntegerLiteral:
-	value=NUMBER;
+	value=GNUMBER;
 
 ClassLiteral:
 	value=CLASSREF;
@@ -207,11 +213,11 @@ AugmentDeclaration:
 	(func+=FunctionDeclaration BlankLines)* "}";
 
 FunctionDeclaration:
-	FUNCTION name=IDENTIFIER "=" function=FunctionStmt;
+	FUNCTION name=ID "=" function=FunctionStmt;
 
 StructDeclararation:
-  STRUCT name=IDENTIFIER "=" "{" BlankLines
-  member+=IDENTIFIER BlankLines ("," BlankLines member+=IDENTIFIER BlankLines)*
+  STRUCT name=ID "=" "{" BlankLines
+  member+=ID BlankLines ("," BlankLines member+=ID BlankLines)*
   "}";
   
 Statement:
@@ -249,14 +255,14 @@ ForLoop:
 	block=Block;
 
 ForEachLoop:
-	FOREACH (("(" elemenId=IDENTIFIER IN expression=ExpressionStatement ")" ) |
-	        (elemenId=IDENTIFIER IN expression=ExpressionStatement))
+	FOREACH (("(" elemenId=ID IN expression=ExpressionStatement ")" ) |
+	        (elemenId=ID IN expression=ExpressionStatement))
 	        block=Block; 
 
 TryCatchFinally:
 	TRY tryBlock=Block
 	((FINALLY finallyBlock=Block) |
-     (CATCH "(" exceptionId=IDENTIFIER ")" catchBlock=Block (FINALLY finallyBlock=Block)?));
+     (CATCH "(" exceptionId=ID ")" catchBlock=Block (FINALLY finallyBlock=Block)?));
 	 
 ExpressionStatement:
 	CommutativeExpression;
@@ -276,12 +282,12 @@ AssociativeExpression:
 	 unaryExpression=UnaryExpression)
 	BlankLine?
 	((token+=ASSOCIATIVE_OPERATOR BlankLine? associativeExpression+=AssociativeExpression) |
-	 (BlankLine? INVOCATION BlankLine? methodInvocation+=MethodInvocation)
+	 (BlankLine? (':' | '?:') BlankLine? methodInvocation+=MethodInvocation)
 	)*
 	BlankLine?;
 
 MethodInvocation:
-	token=IDENTIFIER =>"(" BlankLine? expressions=Expressions? ")"
+	token=ID =>"(" BlankLine? expressions=Expressions? ")"
 	anonymousInvocation+=AnonymousFunctionInvocation*;
 
 Block:
@@ -307,7 +313,7 @@ Literal:
 	value=FunctionRef;
 
 Reference:
-	id=IDENTIFIER;
+	id=ID;
 
 CollectionLiteral:
   COLL_START BlankLine?
@@ -315,11 +321,11 @@ CollectionLiteral:
   "]"
 ;
 LetOrVar:
-	(LET idToken=IDENTIFIER "=" BlankLine? ExpressionStatement) |
-	(VAR idToken=IDENTIFIER "=" BlankLine? ExpressionStatement);
+	(LET idToken=ID "=" BlankLine? ExpressionStatement) |
+	(VAR idToken=ID "=" BlankLine? ExpressionStatement);
 
 Assignment:
-	idToken=IDENTIFIER "=" BlankLine? expressionStatement=ExpressionStatement;
+	idToken=ID "=" BlankLine? expressionStatement=ExpressionStatement;
 
 ReturnStmt:
 	{ReturnStmt}
