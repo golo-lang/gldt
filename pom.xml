@@ -52,7 +52,7 @@
   <properties>
     <tycho-version>0.19.0</tycho-version>
     <jboss-tycho-plugin-version>0.16.0.CR2</jboss-tycho-plugin-version>
-    <mojo-executor-maven-plugin-version>2.0</mojo-executor-maven-plugin-version>
+    <mojo-executor-maven-plugin-version>2.1.0</mojo-executor-maven-plugin-version>
     <wagon-maven-plugin-version>1.0-beta-4</wagon-maven-plugin-version>
     <aws-maven-plugin-version>5.0.0.BUILD-SNAPSHOT</aws-maven-plugin-version>
   </properties>
