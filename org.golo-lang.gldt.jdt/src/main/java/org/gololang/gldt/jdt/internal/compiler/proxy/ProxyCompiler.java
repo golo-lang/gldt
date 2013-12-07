@@ -113,13 +113,13 @@ public class ProxyCompiler implements Compiler {
       List<Object> problems = (List<Object>) exceptionProblemsMethod.invoke(e, new Object[] {});
       for(Object problem : problems) {
         final Object token = problemTokenMethod.invoke(problem, new Object[] {});
-        final int beginLine = tokenBeginLineField.getInt(token);
-        final int beginColumn = tokenBeginColumnField.getInt(token);
-        final int startOffset = tokenStartOffsetField.getInt(token);
-        final int endLine = tokenEndLineField.getInt(token);
-        final int endColumn = tokenEndColumnField.getInt(token);
-        final int endOffset = tokenEndOffsetField.getInt(token);
-        final String image = (String) tokenImageField.get(token);
+        final int beginLine = (token!=null)?tokenBeginLineField.getInt(token):1;
+        final int beginColumn = (token!=null)?tokenBeginColumnField.getInt(token):1;
+        final int startOffset = (token!=null)?tokenStartOffsetField.getInt(token):0;
+        final int endLine = (token!=null)?tokenEndLineField.getInt(token):1;
+        final int endColumn = (token!=null)?tokenEndColumnField.getInt(token):1;
+        final int endOffset = (token!=null)?tokenEndOffsetField.getInt(token):0;
+        final String image = (token!=null)?(String) tokenImageField.get(token):""; //$NON-NLS-1$
         final String description = (String) problemDescriptionMethod.invoke(problem, new Object[] {});
         ce.report(beginLine,
                   beginColumn,
