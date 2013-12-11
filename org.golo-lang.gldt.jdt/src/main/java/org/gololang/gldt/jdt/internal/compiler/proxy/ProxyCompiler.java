@@ -38,7 +38,8 @@ public class ProxyCompiler implements Compiler {
   private Method packageAndClassPackageNameMethod;
   private Method exceptionProblemsMethod;
   private Method problemDescriptionMethod;
-  private Method problemTokenMethod;
+  private Method problemFirstTokenMethod;
+  private Method problemLastTokenMethod;
   private Field tokenBeginLineField;
   private Field tokenBeginColumnField;
   private Field tokenStartOffsetField;
@@ -55,7 +56,8 @@ public class ProxyCompiler implements Compiler {
                        Method packageAndClassPackageNameMethod,
                        Method exceptionProblemsMethod,
                        Method problemDescriptionMethod,
-                       Method problemTokenMethod,
+                       Method problemFirstTokenMethod,
+                       Method problemLastTokenMethod,
                        Field tokenBeginLineField,
                        Field tokenBeginColumnField,
                        Field tokenStartOffsetField,
@@ -71,7 +73,8 @@ public class ProxyCompiler implements Compiler {
     this.packageAndClassPackageNameMethod = packageAndClassPackageNameMethod;
     this.exceptionProblemsMethod = exceptionProblemsMethod;
     this.problemDescriptionMethod = problemDescriptionMethod;
-    this.problemTokenMethod = problemTokenMethod;
+    this.problemFirstTokenMethod = problemFirstTokenMethod;
+    this.problemLastTokenMethod = problemLastTokenMethod;
     this.tokenBeginLineField = tokenBeginLineField;
     this.tokenBeginColumnField = tokenBeginColumnField;
     this.tokenStartOffsetField = tokenStartOffsetField;
@@ -112,14 +115,15 @@ public class ProxyCompiler implements Compiler {
     try {
       List<Object> problems = (List<Object>) exceptionProblemsMethod.invoke(e, new Object[] {});
       for(Object problem : problems) {
-        final Object token = problemTokenMethod.invoke(problem, new Object[] {});
-        final int beginLine = (token!=null)?tokenBeginLineField.getInt(token):1;
-        final int beginColumn = (token!=null)?tokenBeginColumnField.getInt(token):1;
-        final int startOffset = (token!=null)?tokenStartOffsetField.getInt(token):0;
-        final int endLine = (token!=null)?tokenEndLineField.getInt(token):1;
-        final int endColumn = (token!=null)?tokenEndColumnField.getInt(token):1;
-        final int endOffset = (token!=null)?tokenEndOffsetField.getInt(token):0;
-        final String image = (token!=null)?(String) tokenImageField.get(token):""; //$NON-NLS-1$
+        final Object firstToken = problemFirstTokenMethod.invoke(problem, new Object[] {});
+        final Object lastToken = problemLastTokenMethod.invoke(problem, new Object[] {});
+        final int beginLine = (firstToken!=null)?tokenBeginLineField.getInt(firstToken):0;
+        final int beginColumn = (firstToken!=null)?tokenBeginColumnField.getInt(firstToken):0;
+        final int startOffset = (firstToken!=null)?tokenStartOffsetField.getInt(firstToken):0;
+        final int endLine = (lastToken!=null)?tokenEndLineField.getInt(lastToken):0;
+        final int endColumn = (lastToken!=null)?tokenEndColumnField.getInt(lastToken):0;
+        final int endOffset = (lastToken!=null)?tokenEndOffsetField.getInt(lastToken):0;
+        final String image = (firstToken!=null)?(String) tokenImageField.get(firstToken):""; //$NON-NLS-1$
         final String description = (String) problemDescriptionMethod.invoke(problem, new Object[] {});
         ce.report(beginLine,
                   beginColumn,

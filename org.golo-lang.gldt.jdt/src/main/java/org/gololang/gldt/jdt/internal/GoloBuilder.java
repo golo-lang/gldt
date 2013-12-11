@@ -183,11 +183,11 @@ public class GoloBuilder extends IncrementalProjectBuilder {
       for(Problem problem : e.getProblems()) {
         try {
           IMarker marker = entry.resource.createMarker(GoloJdtConstants.GOLO_COMPILATION_MARKER_ID);
-          marker.setAttribute(IMarker.LINE_NUMBER, problem.getBeginLine());
+          marker.setAttribute(IMarker.LINE_NUMBER, problem.getBeginLine() + 1);
           marker.setAttribute(IMarker.MESSAGE, problem.getDescription());
           marker.setAttribute(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
-          marker.setAttribute(IMarker.CHAR_START, problem.getBeginOffset());
-          marker.setAttribute(IMarker.CHAR_END, problem.getEndOffset());
+          //marker.setAttribute(IMarker.CHAR_START, problem.getBeginOffset());
+          //marker.setAttribute(IMarker.CHAR_END, problem.getEndOffset());
         }
         catch (CoreException e1) {
           // TODO Auto-generated catch block

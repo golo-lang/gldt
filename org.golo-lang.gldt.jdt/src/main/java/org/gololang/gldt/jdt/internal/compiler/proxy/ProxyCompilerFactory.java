@@ -38,47 +38,51 @@ import org.gololang.gldt.jdt.compiler.CompilerInstantiationException;
  */
 public class ProxyCompilerFactory implements CompilerFactory {
 
-  private static final String GOLO_COMPILER_CLASS_NAME = "fr.insalyon.citi.golo.compiler.GoloCompiler";
+  private static final String GOLO_COMPILER_CLASS_NAME = "fr.insalyon.citi.golo.compiler.GoloCompiler"; //$NON-NLS-1$
 
-  private static final String GOLO_COMPILER_COMPILE_METHOD = "compile";
+  private static final String GOLO_COMPILER_COMPILE_METHOD = "compile"; //$NON-NLS-1$
   
-  private static final String GOLO_COMPILATION_RESULT_CLASS_NAME = "fr.insalyon.citi.golo.compiler.CodeGenerationResult";
+  private static final String GOLO_COMPILATION_RESULT_CLASS_NAME = "fr.insalyon.citi.golo.compiler.CodeGenerationResult"; //$NON-NLS-1$
   
-  private static final String GOLO_RESULT_BYTECODE_METHOD = "getBytecode";
+  private static final String GOLO_RESULT_BYTECODE_METHOD = "getBytecode"; //$NON-NLS-1$
   
-  private static final String GOLO_RESULT_PACKAGE_AND_CLASS_METHOD = "getPackageAndClass";
+  private static final String GOLO_RESULT_PACKAGE_AND_CLASS_METHOD = "getPackageAndClass"; //$NON-NLS-1$
   
-  private static final String GOLO_PACKAGE_AND_CLASS_CLASS_NAME = "fr.insalyon.citi.golo.compiler.PackageAndClass";
+  private static final String GOLO_PACKAGE_AND_CLASS_CLASS_NAME = "fr.insalyon.citi.golo.compiler.PackageAndClass"; //$NON-NLS-1$
   
-  private static final String GOLO_PACKAGE_AND_CLASS_CLASS_NAME_METHOD = "className";
+  private static final String GOLO_PACKAGE_AND_CLASS_CLASS_NAME_METHOD = "className"; //$NON-NLS-1$
   
-  private static final String GOLO_PACKAGE_AND_CLASS_PACKAGE_NAME_METHOD = "packageName";
+  private static final String GOLO_PACKAGE_AND_CLASS_PACKAGE_NAME_METHOD = "packageName"; //$NON-NLS-1$
   
-  private static final String GOLO_COMPILER_EXCEPTION_CLASS_NAME = "fr.insalyon.citi.golo.compiler.GoloCompilationException";
+  private static final String GOLO_COMPILER_EXCEPTION_CLASS_NAME = "fr.insalyon.citi.golo.compiler.GoloCompilationException"; //$NON-NLS-1$
   
-  private static final String GOLO_COMPILER_EXCEPTION_PROBLEMS_METHOD_NAME = "getProblems";
+  private static final String GOLO_COMPILER_EXCEPTION_PROBLEMS_METHOD_NAME = "getProblems"; //$NON-NLS-1$
   
-  private static final String GOLO_COMPILER_PROBLEM_CLASS_NAME = "fr.insalyon.citi.golo.compiler.GoloCompilationException$Problem";
+  private static final String GOLO_COMPILER_PROBLEM_CLASS_NAME = "fr.insalyon.citi.golo.compiler.GoloCompilationException$Problem"; //$NON-NLS-1$
   
-  private static final String GOLO_COMPILER_PROBLEM_DESCRIPTION_METHOD_NAME = "getDescription";
+  private static final String GOLO_COMPILER_PROBLEM_DESCRIPTION_METHOD_NAME = "getDescription"; //$NON-NLS-1$
   
-  private static final String GOLO_COMPILER_PROBLEM_TOKEN_METHOD_NAME = "getToken";
+  private static final String GOLO_COMPILER_PROBLEM_TOKEN_METHOD_NAME = "getToken"; //$NON-NLS-1$
   
-  private static final String GOLO_COMPILER_TOKEN_CLASS_NAME = "fr.insalyon.citi.golo.compiler.parser.Token";
+  private static final String GOLO_COMPILER_PROBLEM_FIRST_TOKEN_METHOD_NAME = "getFirstToken"; //$NON-NLS-1$
   
-  private static final String GOLO_COMPILER_TOKEN_BEGIN_LINE_FIELD_NAME = "beginLine";
+  private static final String GOLO_COMPILER_PROBLEM_LAST_TOKEN_METHOD_NAME = "getLastToken"; //$NON-NLS-1$
   
-  private static final String GOLO_COMPILER_TOKEN_BEGIN_COLUMN_FIELD_NAME = "beginColumn";
+  private static final String GOLO_COMPILER_TOKEN_CLASS_NAME = "fr.insalyon.citi.golo.compiler.parser.Token"; //$NON-NLS-1$
   
-  private static final String GOLO_COMPILER_TOKEN_START_OFFSET_FIELD_NAME = "startOffset";
+  private static final String GOLO_COMPILER_TOKEN_BEGIN_LINE_FIELD_NAME = "beginLine"; //$NON-NLS-1$
   
-  private static final String GOLO_COMPILER_TOKEN_END_LINE_FIELD_NAME = "endLine";
+  private static final String GOLO_COMPILER_TOKEN_BEGIN_COLUMN_FIELD_NAME = "beginColumn"; //$NON-NLS-1$
   
-  private static final String GOLO_COMPILER_TOKEN_END_COLUMN_FIELD_NAME = "endColumn";
+  private static final String GOLO_COMPILER_TOKEN_START_OFFSET_FIELD_NAME = "startOffset"; //$NON-NLS-1$
   
-  private static final String GOLO_COMPILER_TOKEN_END_OFFSET_FIELD_NAME = "endOffset";
+  private static final String GOLO_COMPILER_TOKEN_END_LINE_FIELD_NAME = "endLine"; //$NON-NLS-1$
   
-  private static final String GOLO_COMPILER_TOKEN_IMAGE_FIELD_NAME = "image";
+  private static final String GOLO_COMPILER_TOKEN_END_COLUMN_FIELD_NAME = "endColumn"; //$NON-NLS-1$
+  
+  private static final String GOLO_COMPILER_TOKEN_END_OFFSET_FIELD_NAME = "endOffset"; //$NON-NLS-1$
+  
+  private static final String GOLO_COMPILER_TOKEN_IMAGE_FIELD_NAME = "image"; //$NON-NLS-1$
   
   /**
    * 
@@ -98,7 +102,8 @@ public class ProxyCompilerFactory implements CompilerFactory {
       Method packageAndClassPackageNameMethod;
       Method exceptionProblemsMethod;
       Method problemDescriptionMethod;
-      Method problemTokenMethod;
+      Method problemFirstTokenMethod;
+      Method problemLastTokenMethod;
       Field tokenBeginLineField;
       Field tokenBeginColumnField;
       Field tokenStartOffsetField;
@@ -129,7 +134,15 @@ public class ProxyCompilerFactory implements CompilerFactory {
       exceptionProblemsMethod = exceptionClass.getMethod(GOLO_COMPILER_EXCEPTION_PROBLEMS_METHOD_NAME, new Class[] {});
       Class<?> problemClass = cl.loadClass(GOLO_COMPILER_PROBLEM_CLASS_NAME);
       problemDescriptionMethod = problemClass.getMethod(GOLO_COMPILER_PROBLEM_DESCRIPTION_METHOD_NAME, new Class[] {});
-      problemTokenMethod = problemClass.getMethod(GOLO_COMPILER_PROBLEM_TOKEN_METHOD_NAME, new Class[] {});
+      try {
+        problemFirstTokenMethod = problemClass.getMethod(GOLO_COMPILER_PROBLEM_TOKEN_METHOD_NAME, new Class[] {});
+        problemLastTokenMethod = problemFirstTokenMethod;
+      }
+      catch (NoSuchMethodException e) {
+        problemFirstTokenMethod = problemClass.getMethod(GOLO_COMPILER_PROBLEM_FIRST_TOKEN_METHOD_NAME, new Class[] {});
+        problemLastTokenMethod = problemClass.getMethod(GOLO_COMPILER_PROBLEM_LAST_TOKEN_METHOD_NAME, new Class[] {});
+        
+      }
       Class<?> tokenClass = cl.loadClass(GOLO_COMPILER_TOKEN_CLASS_NAME);
       tokenBeginLineField = tokenClass.getField(GOLO_COMPILER_TOKEN_BEGIN_LINE_FIELD_NAME);
       tokenBeginColumnField = tokenClass.getField(GOLO_COMPILER_TOKEN_BEGIN_COLUMN_FIELD_NAME);
@@ -145,7 +158,8 @@ public class ProxyCompilerFactory implements CompilerFactory {
                                packageAndClassPackageNameMethod,
                                exceptionProblemsMethod,
                                problemDescriptionMethod,
-                               problemTokenMethod,
+                               problemFirstTokenMethod,
+                               problemLastTokenMethod,
                                tokenBeginLineField,
                                tokenBeginColumnField,
                                tokenStartOffsetField,
