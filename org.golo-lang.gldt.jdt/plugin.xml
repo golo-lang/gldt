@@ -214,4 +214,14 @@
          </action>
       </editorContribution>
    </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            category="org.eclipse.jdt.ui.java"
+            class="org.gololang.gldt.jdt.wizards.GoloProjectWizard"
+            id="org.golo-lang.gldt.jdt.wizard.newProject"
+            name="Golo project"
+            project="true">
+      </wizard>
+   </extension>
 </plugin>
