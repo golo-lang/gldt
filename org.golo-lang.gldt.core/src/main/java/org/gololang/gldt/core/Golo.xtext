@@ -26,6 +26,11 @@ CompilationUnit:
 	(imports+=ImportDeclaration BlankLines)*
 	(declarations+=TopLevelDeclaration BlankLines)*/*ExpressionStatement*/;
 
+terminal fragment COMMENT_SUFFIX:
+  ' ' | '\t';
+
+terminal ML_COMMENT: '---' -> '---' COMMENT_SUFFIX* NEWLINE;
+
 terminal WS :
 	' ' |
 	'\t' |
@@ -167,6 +172,10 @@ BlankLine:
 BlankLines:
 	BlankLine*;
 
+
+Documentation:
+  documentation=ML_COMMENT;
+
 /*QualifiedName:
 	elements+=IDENTIFIER ("." elements+=IDENTIFIER)*;*/
 
@@ -198,19 +207,21 @@ FunctionRef:
 	value=FUNREF;
 
 ModuleDeclaration:
+  documentation=Documentation?
 	MODULE name=QualifiedName;
 
 ImportDeclaration:
 	IMPORT name=QualifiedName;
 
 TopLevelDeclaration:
-	AugmentDeclaration |
+  documentation=Documentation?
+	(augmentation=AugmentDeclaration |
 	((isLocal=LOCAL)? functionDecl=FunctionDeclaration) |
-  struct=StructDeclararation;
+  struct=StructDeclararation);
 
 AugmentDeclaration:
 	AUGMENT target=QualifiedName "{" BlankLines
-	(func+=FunctionDeclaration BlankLines)* "}";
+	(documentation+=Documentation? func+=FunctionDeclaration BlankLines)* "}";
 
 FunctionDeclaration:
 	FUNCTION name=ID "=" function=FunctionStmt;

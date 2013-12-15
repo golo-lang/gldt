@@ -113,5 +113,10 @@ public class ForParsingAndCompilationTest {
   public void checkThatCollectionLiteralsParsingIsOK() {
     ParserTestHelper.testFile("/for-parsing-and-compilation/collection-literals.golo");
   }
+  
+  @Test
+  public void checkThatDocIsOK() {
+    ParserTestHelper.testFile("/for-parsing-and-compilation/doc.golo");
+  }
 
 }
