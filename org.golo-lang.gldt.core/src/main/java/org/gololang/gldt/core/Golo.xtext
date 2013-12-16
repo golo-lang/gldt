@@ -29,7 +29,7 @@ CompilationUnit:
 terminal fragment COMMENT_SUFFIX:
   ' ' | '\t';
 
-terminal ML_COMMENT: '---' -> '---' COMMENT_SUFFIX* NEWLINE;
+terminal ML_COMMENT: '----' -> '----' COMMENT_SUFFIX* NEWLINE;
 
 terminal WS :
 	' ' |
