@@ -70,6 +70,11 @@
                       <type>target</type>
                       <classifier>e43</classifier>
                     </artifact>
+                    <artifact>
+                      <file>golo.target</file>
+                      <type>target</type>
+                      <classifier>golo</classifier>
+                    </artifact>
  	          </artifacts>
  	        </configuration>
  	      </execution>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+/*******************************************************************************
+* Copyright 2013 Jeff MAURY
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+******************************************************************************/
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.golo-lang.gldt</groupId>
+    <artifactId>gldt</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>releng</artifactId>
+  <packaging>pom</packaging>
+  <name>Golo Language Development Toolkit (Releng)</name>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>copy</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>org.ow2.asm</groupId>
+                  <artifactId>asm</artifactId>
+                  <version>4.2</version>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>com.beust</groupId>
+                  <artifactId>jcommander</artifactId>
+                  <version>1.32</version>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>org.golo-lang</groupId>
+                  <artifactId>golo</artifactId>
+                  <version>0-preview5</version>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>org.golo-lang</groupId>
+                  <artifactId>golo</artifactId>
+                  <version>0-preview6</version>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>org.golo-lang</groupId>
+                  <artifactId>golo</artifactId>
+                  <version>0-preview7</version>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>org.golo-lang</groupId>
+                  <artifactId>golo</artifactId>
+                  <version>0-preview8</version>
+                </artifactItem>
+                <artifactItem>
+                  <groupId>org.golo-lang</groupId>
+                  <artifactId>golo</artifactId>
+                  <version>0-preview9</version>
+                </artifactItem>
+              </artifactItems>
+              <outputDirectory>${project.build.directory}/repository/plugins</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.eclipse.tycho.extras</groupId>
+        <artifactId>tycho-p2-extras-plugin</artifactId>
+        <version>${tycho-version}</version>
+        <executions>
+          <execution>
+            <!-- : generate the full p2 metadata for the mirrored artifacts -->
+            <id>generate-full-metadata</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>publish-features-and-bundles</goal>
+            </goals>
+            <configuration>
+              <sourceLocation>${project.build.directory}/repository</sourceLocation>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>      
+    </plugins>
+  </build>
+  <profiles>
+    <profile>
+      <id>deploy</id>
+      <properties>
+        <siteUrl>s3://gldt-update-site.golo-lang.org</siteUrl>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.twdata.maven</groupId>
+            <artifactId>mojo-executor-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>download</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>execute-mojo</goal>
+                </goals>
+                <configuration>
+                  <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>wagon-maven-plugin</artifactId>
+                    <version>${wagon-maven-plugin-version}</version>
+                    <dependencies>
+                      <dependency>
+                        <groupId>org.springframework.build</groupId>
+                        <artifactId>aws-maven</artifactId>
+                        <version>${aws-maven-plugin-version}</version>
+                      </dependency>
+                    </dependencies>
+                  </plugin>
+                  <goal>download</goal>
+                  <configuration>
+                    <url>${siteUrl}</url>
+                    <toDir>${project.build.directory}/remote</toDir>
+                    <fromDir>${siteSuffix}</fromDir>
+                    <serverId>golo</serverId>
+                    <includes>**</includes>
+                  </configuration>
+                </configuration>
+              </execution>
+              <execution>
+                <id>mirror</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>execute-mojo</goal>
+                </goals>
+                <configuration>
+                  <plugin>
+                    <groupId>org.eclipse.tycho.extras</groupId>
+                    <artifactId>tycho-p2-extras-plugin</artifactId>
+                    <version>${tycho-version}</version>
+                  </plugin>
+                  <goal>mirror</goal>
+                  <configuration>
+                    <source>
+                      <repository>
+                        <url>${project.baseUri}/target/repository</url>
+                      </repository>
+                    </source>
+                    <destination>${project.build.directory}/remote</destination>
+                  </configuration>
+                </configuration>
+              </execution>
+              <execution>
+                <id>upload</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>execute-mojo</goal>
+                </goals>
+                <configuration>
+                  <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>wagon-maven-plugin</artifactId>
+                    <version>${wagon-maven-plugin-version}</version>
+                    <dependencies>
+                      <dependency>
+                        <groupId>org.springframework.build</groupId>
+                        <artifactId>aws-maven</artifactId>
+                        <version>${aws-maven-plugin-version}</version>
+                      </dependency>
+                    </dependencies>
+                  </plugin>
+                  <goal>upload</goal>
+                  <configuration>
+                    <url>${siteUrl}</url>
+                    <toDir>${siteSuffix}</toDir>
+                    <fromDir>${project.build.directory}/remote</fromDir>
+                    <serverId>golo</serverId>
+                  </configuration>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>

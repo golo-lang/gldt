@@ -3,5 +3,8 @@
    <feature url="features/org.golo-lang.gldt.core.feature_0.0.1.qualifier.jar" id="org.golo-lang.gldt.core.feature" version="0.0.1.qualifier">
       <category name="org.golo-lang.gldt"/>
    </feature>
+   <feature url="features/org.golo-lang.gldt.runtime.feature_0.0.1.qualifier.jar" id="org.golo-lang.gldt.runtime.feature" version="0.0.1.qualifier">
+      <category name="org.golo-lang.gldt"/>
+   </feature>
    <category-def name="org.golo-lang.gldt" label="GLDT"/>
 </site>

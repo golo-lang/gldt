@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.6"?>
+
+<target includeMode="feature" name="golo" sequenceNumber="1">
+<locations>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.golo-lang.golo" version="0.0.0.preview5"/>
+<unit id="org.golo-lang.golo" version="0.0.0.preview6"/>
+<unit id="org.golo-lang.golo" version="0.0.0.preview7"/>
+<unit id="org.golo-lang.golo" version="0.0.0.preview8"/>
+<unit id="org.golo-lang.golo" version="0.0.0.preview9"/>
+<unit id="org.objectweb.asm" version="4.2.0"/>
+<unit id="com.beust.jcommander" version="1.32.0"/>
+<repository location="http://gldt-update-site.golo-lang.org/build"/>
+</location>
+</locations>
+</target>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.golo-lang.gldt.core.feature"
-      label="Golo Development Toolkit Core"
+      id="org.golo-lang.gldt.runtime.feature"
+      label="Golo Development Toolkit Runtime"
       version="0.0.1.qualifier"
       provider-name="Jeff MAURY">
 
    <description url="http://www.golo-lang.org">
-      Golo Development Toolkit Core Feature
+      Golo Development Toolkit Runtime Feature
    </description>
 
    <copyright url="http://www.apache.org/licenses/LICENSE-2.0">
@@ -19,10 +19,14 @@
 *
 * http://www.apache.org/licenses/LICENSE-2.0
 *
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
+* Unless required by applicable law or agreed to in writing,
+software
+* distributed under the License is distributed on an &quot;AS IS&quot;
+BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+or implied.
+* See the License for the specific language governing permissions
+and
 * limitations under the License.
 ******************************************************************************/
    </copyright>
@@ -37,48 +41,58 @@
 *
 * http://www.apache.org/licenses/LICENSE-2.0
 *
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
+* Unless required by applicable law or agreed to in writing,
+software
+* distributed under the License is distributed on an &quot;AS IS&quot;
+BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+or implied.
+* See the License for the specific language governing permissions
+and
 * limitations under the License.
 ******************************************************************************/
    </license>
 
-   <url>
-      <discovery label="Xtext" url="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases"/>
-   </url>
-
-   <requires>
-      <import feature="org.eclipse.xtext.runtime" version="2.4.3.v201309030823" match="greaterOrEqual"/>
-   </requires>
-
    <plugin
-         id="org.golo-lang.gldt.core"
+         id="org.golo-lang.golo"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.0.0.preview5"
          unpack="false"/>
 
    <plugin
-         id="org.golo-lang.gldt.core.ui"
+         id="org.golo-lang.golo"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.0.0.preview6"
          unpack="false"/>
 
    <plugin
-         id="org.golo-lang.gldt.jdt"
+         id="org.golo-lang.golo"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="0.0.0.preview7"
          unpack="false"/>
 
    <plugin
-         id="org.objectweb.asm"
+         id="org.golo-lang.golo"
          download-size="0"
          install-size="0"
-         version="4.2.0"
+         version="0.0.0.preview8"
+         unpack="false"/>
+
+   <plugin
+         id="org.golo-lang.golo"
+         download-size="0"
+         install-size="0"
+         version="0.0.0.preview9"
+         unpack="false"/>
+
+   <plugin
+         id="com.beust.jcommander"
+         download-size="0"
+         install-size="0"
+         version="1.32.0"
          unpack="false"/>
 
 </feature>
