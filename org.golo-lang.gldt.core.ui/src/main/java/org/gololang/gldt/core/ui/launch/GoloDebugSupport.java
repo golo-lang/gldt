@@ -22,13 +22,13 @@ import org.eclipse.xtext.resource.XtextResource;
  * @author jeffmaury
  *
  */
+@SuppressWarnings("restriction")
 public class GoloDebugSupport implements IStratumBreakpointSupport {
 
   /* (non-Javadoc)
    * @see org.eclipse.xtext.debug.IStratumBreakpointSupport#isValidLineForBreakPoint(org.eclipse.xtext.resource.XtextResource, int)
    */
   public boolean isValidLineForBreakPoint(XtextResource resource, int line) {
-    System.out.println("Debug called on line " + line + " for resource " + resource);
     return true;
   }
 
