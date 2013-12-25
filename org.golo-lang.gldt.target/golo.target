@@ -9,6 +9,7 @@
 <unit id="org.golo-lang.golo" version="0.0.0.preview7"/>
 <unit id="org.golo-lang.golo" version="0.0.0.preview8"/>
 <unit id="org.golo-lang.golo" version="0.0.0.preview9"/>
+<unit id="org.golo-lang.golo" version="0.0.0.preview10"/>
 <unit id="org.objectweb.asm" version="4.2.0"/>
 <unit id="com.beust.jcommander" version="1.32.0"/>
 <repository location="http://gldt-update-site.golo-lang.org/build"/>
