@@ -45,5 +45,19 @@ public class GoloJdtConstants {
 
   public static final String GOLO_LAUNCH_SCRIPT_PARAMETER_DEFAULT_VALUE = ""; //$NON-NLS-1$
 
-  public static final String GOLO_CLI_CLASS_NAME = "fr.insalyon.citi.golo.cli.Main";
+  public static final String GOLO_CLI_CLASS_NAME = "fr.insalyon.citi.golo.cli.Main"; //$NON-NLS-1$
+  
+  public static final String GOLO_RUNTIME_OSGI_IDENTIFIER = "org.golo-lang.golo"; //$NON-NLS-1$
+  
+  public static final String ASM_OSGI_IDENTIFIER = "org.objectweb.asm"; //$NON-NLS-1$
+  
+  public static final String ASM_MINIMUM_VERSION = "4.0"; //$NON-NLS-1$
+  
+  public static final String JCOMMANDER_OSGI_IDENTIFIER = "com.beust.jcommander"; //$NON-NLS-1$
+
+  /**
+   * Identifier for the Golo library container. Mathes the id in plugin.xml.
+   */
+  public static final String GOLO_LIBRARY_CONTAINER_IDENTIFIER = "org.golo-lang.gldt.jdt.GOLO_LIBRARY"; //$NON-NLS-1$
+
 }
