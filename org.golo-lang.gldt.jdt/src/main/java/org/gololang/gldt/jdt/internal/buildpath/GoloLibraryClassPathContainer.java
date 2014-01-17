@@ -15,6 +15,7 @@
 ******************************************************************************/
 package org.gololang.gldt.jdt.internal.buildpath;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.core.runtime.FileLocator;
@@ -32,15 +33,17 @@ import org.osgi.framework.Bundle;
  */
 public class GoloLibraryClassPathContainer implements IClasspathContainer {
 
-  private Bundle goloBundle;
+  private File goloFile;
+  private String identifier;
   private Bundle asmBundle;
   private Bundle jcommanderBundle;
 
   /**
    * 
    */
-  public GoloLibraryClassPathContainer(Bundle goloBundle, Bundle asmBundle, Bundle jcommanderBundle) {
-    this.goloBundle = goloBundle;
+  public GoloLibraryClassPathContainer(File goloFile, String identifier, Bundle asmBundle, Bundle jcommanderBundle) {
+    this.goloFile = goloFile;
+    this.identifier = identifier;
     this.asmBundle = asmBundle;
     this.jcommanderBundle = jcommanderBundle;
   }
@@ -50,7 +53,7 @@ public class GoloLibraryClassPathContainer implements IClasspathContainer {
    */
   public IClasspathEntry[] getClasspathEntries() {
     try {
-      IClasspathEntry goloEntry = JavaCore.newLibraryEntry(new Path(FileLocator.getBundleFile(goloBundle).getAbsolutePath()), null, null);
+      IClasspathEntry goloEntry = JavaCore.newLibraryEntry(new Path(goloFile.getAbsolutePath()), null, null);
       IClasspathEntry asmEntry = JavaCore.newLibraryEntry(new Path(FileLocator.getBundleFile(asmBundle).getAbsolutePath()), null, null);
       IClasspathEntry[] entries;
       if (jcommanderBundle != null) {
@@ -70,7 +73,7 @@ public class GoloLibraryClassPathContainer implements IClasspathContainer {
    * @see org.eclipse.jdt.core.IClasspathContainer#getDescription()
    */
   public String getDescription() {
-    return "Golo library [" + goloBundle.getVersion().toString() + "]";
+    return "Golo library [" + getIdentifier() + "]";
   }
 
   /* (non-Javadoc)
@@ -84,7 +87,11 @@ public class GoloLibraryClassPathContainer implements IClasspathContainer {
    * @see org.eclipse.jdt.core.IClasspathContainer#getPath()
    */
   public IPath getPath() {
-    return new Path(GoloJdtConstants.GOLO_LIBRARY_CONTAINER_IDENTIFIER).append(goloBundle.getVersion().toString());
+    return new Path(GoloJdtConstants.GOLO_LIBRARY_CONTAINER_IDENTIFIER).append(getIdentifier());
+  }
+  
+  protected String getIdentifier() {
+    return identifier;
   }
 
 }

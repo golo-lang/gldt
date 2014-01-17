@@ -75,6 +75,11 @@
                       <type>target</type>
                       <classifier>golo</classifier>
                     </artifact>
+                    <artifact>
+                      <file>aether.target</file>
+                      <type>target</type>
+                      <classifier>aether</classifier>
+                    </artifact>
  	          </artifacts>
  	        </configuration>
  	      </execution>

@@ -60,4 +60,17 @@ public class GoloJdtConstants {
    */
   public static final String GOLO_LIBRARY_CONTAINER_IDENTIFIER = "org.golo-lang.gldt.jdt.GOLO_LIBRARY"; //$NON-NLS-1$
 
+  public static final String[] AETHER_BUNDLES_IDS = {
+    "org.eclipse.aether.api", //$NON-NLS-1$
+    "org.eclipse.aether.maven", //$NON-NLS-1$
+    "org.eclipse.aether.impl", //$NON-NLS-1$
+    "org.eclipse.aether.connector.basic", //$NON-NLS-1$
+    "org.eclipse.aether.spi", //$NON-NLS-1$
+    "org.eclipse.aether.transport.http" //$NON-NLS-1$
+  };
+  
+  /**
+   * Name of the Golo library that deals with latest bits of Golo (need Aether to resolve)
+   */
+  public static final String GOLO_LATEST_LIBRARY_ID = "LATEST"; //$NON-NLS-1$
 }

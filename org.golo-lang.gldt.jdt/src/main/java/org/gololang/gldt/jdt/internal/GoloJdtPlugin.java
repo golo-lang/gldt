@@ -116,4 +116,17 @@ public class GoloJdtPlugin extends AbstractUIPlugin {
 	  }
 	  return selected;
 	}
+	
+	/**
+	 * Check that the Aether bundles are installed in the running platform.
+	 * 
+	 * @return true if all required Aether bundles are installed, false otherwise
+	 */
+	public boolean isAetherAvailable() {
+	  boolean result = true;
+	  for(int i=0; result && i < GoloJdtConstants.AETHER_BUNDLES_IDS.length;++i) {
+	    result &= getBundle(GoloJdtConstants.AETHER_BUNDLES_IDS[i], null, false) != null;
+	  }
+	  return result;
+	}
 }

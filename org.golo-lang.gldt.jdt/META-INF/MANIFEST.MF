@@ -14,7 +14,13 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.debug.ui,
  org.eclipse.jdt.debug.ui,
  org.eclipse.jdt.debug,
- org.eclipse.jdt.ui
+ org.eclipse.jdt.ui,
+ org.eclipse.aether.api;resolution:=optional,
+ org.eclipse.aether.maven;resolution:=optional,
+ org.eclipse.aether.impl;resolution:=optional,
+ org.eclipse.aether.spi;resolution:=optional,
+ org.eclipse.aether.transport.http;resolution:=optional,
+ org.eclipse.aether.connector.basic;resolution:=optional
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: .

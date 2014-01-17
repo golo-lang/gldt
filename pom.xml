@@ -105,6 +105,12 @@
               <version>${project.version}</version>
               <classifier>golo</classifier>
             </artifact>
+            <artifact>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>${project.groupId}.target</artifactId>
+              <version>${project.version}</version>
+              <classifier>aether</classifier>
+            </artifact>
           </target>
           <environments>
             <environment>

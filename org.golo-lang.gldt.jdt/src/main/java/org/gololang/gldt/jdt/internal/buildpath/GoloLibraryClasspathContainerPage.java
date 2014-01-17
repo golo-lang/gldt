@@ -15,6 +15,8 @@
 ******************************************************************************/
 package org.gololang.gldt.jdt.internal.buildpath;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Collection;
 
 import org.eclipse.core.runtime.IPath;
@@ -26,10 +28,17 @@ import org.eclipse.jdt.ui.wizards.IClasspathContainerPage;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Link;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.browser.IWorkbenchBrowserSupport;
 import org.gololang.gldt.jdt.GoloJdtConstants;
 import org.gololang.gldt.jdt.internal.GoloJdtPlugin;
 import org.osgi.framework.Bundle;
@@ -62,6 +71,7 @@ public class GoloLibraryClasspathContainerPage extends WizardPage implements
     Label label = new Label(composite, SWT.NONE);
     label.setText("Golo version");
     librariesCombo = new Combo(composite, SWT.NONE);
+    librariesCombo.add(GoloJdtConstants.GOLO_LATEST_LIBRARY_ID);
     Collection<Bundle> availables = GoloJdtPlugin.getDefault().getGoloBundles();
     for(Bundle bundle : availables) {
       librariesCombo.add(bundle.getVersion().toString());
@@ -78,6 +88,23 @@ public class GoloLibraryClasspathContainerPage extends WizardPage implements
         index = librariesCombo.indexOf(bundle.getVersion().toString());
       }
       librariesCombo.select(index);
+    }
+    if (!GoloJdtPlugin.getDefault().isAetherAvailable()) {
+      Link link = new Link(composite, SWT.NONE);
+      link.setText("Aether is not available so using LATEST will lead to library resolution errors. If you want to install Aether, please follow the instructions on this <a href=\"http://github.com/golo-lang/gldt#Aether\">page</a>.");
+      link.addSelectionListener(new SelectionAdapter() {
+        
+        public void widgetSelected(SelectionEvent event) {
+          try {
+            PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(new URL(event.text));
+            GoloLibraryClasspathContainerPage.this.getShell().close();
+          }
+          catch (PartInitException e) {}
+          catch (MalformedURLException e) {}
+          
+        }
+        
+      });
     }
   }
 
