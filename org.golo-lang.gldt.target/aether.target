@@ -4,21 +4,21 @@
 <target includeMode="feature" name="aether" sequenceNumber="1">
 <locations>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.aether.api" version="0.9.0.M4"/>
-<unit id="org.eclipse.aether.impl" version="0.9.0.M4"/>
-<unit id="org.eclipse.aether.spi" version="0.9.0.M4"/>
-<unit id="org.eclipse.aether.transport.http" version="0.9.0.M4"/>
-<unit id="org.eclipse.aether.connector.basic" version="0.9.0.M4"/>
-<repository location="http://download.eclipse.org/aether/aether-core/milestones/"/>
+<unit id="org.eclipse.aether.api" version="1.0.0.v20140518"/>
+<unit id="org.eclipse.aether.impl" version="1.0.0.v20140518"/>
+<unit id="org.eclipse.aether.spi" version="1.0.0.v20140518"/>
+<unit id="org.eclipse.aether.transport.http" version="1.0.0.v20140518"/>
+<unit id="org.eclipse.aether.connector.basic" version="1.0.0.v20140518"/>
+<repository location="http://download.eclipse.org/aether/aether-core/releases/"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.aether.maven" version="3.1.0.v20130803-2031"/>
+<unit id="org.eclipse.aether.maven" version="3.1.0.v20140706-2237"/>
 <repository location="http://download.eclipse.org/aether/maven-aether-provider/releases/"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.apache.httpcomponents.httpclient" version="4.2.6.v201311072007"/>
 <unit id="org.apache.httpcomponents.httpcore" version="4.2.5.v201311072007"/>
-<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/S20131206110810/repository/"/>
+<repository location="http://download.eclipse.org/tools/orbit/downloads/drops/R20140525021250/repository/"/>
 </location>
 </locations>
 </target>
